@@ -1,36 +1,56 @@
-Tugas Praktikum: Integrasi Notifikasi & API Perangkat Keras
+# 📱 Notifikasi & API Perangkat Keras (Flutter)
 
-Nama: Tsaqif Kanz Ahmad
-Program Studi: Teknik Informatika
-Kelas: IF-11-02
+Aplikasi berbasis Flutter ini dirancang untuk mendemonstrasikan integrasi fitur bawaan perangkat keras (kamera dan galeri) sekaligus memicu notifikasi lokal secara *real-time*.
 
-Gambaran Umum Aplikasi
-Proyek ini merupakan sebuah aplikasi berbasis Flutter yang dirancang untuk mendemonstrasikan penggunaan fitur bawaan perangkat (kamera dan galeri) melalui implementasi package image_picker. Selain itu, aplikasi ini juga disematkan fitur pemberitahuan lokal menggunakan package flutter_local_notifications. Alur kerjanya cukup interaktif: setelah pengguna sukses menjepret foto atau memilih gambar dari galeri, antarmuka utama akan langsung memuat gambar tersebut, yang secara bersamaan akan memicu munculnya notifikasi lokal pada perangkat secara real-time.
+---
 
-Rincian Fungsi Widget
-Scaffold: Merupakan fondasi atau struktur dasar dari halaman aplikasi yang bertugas menampung elemen-elemen visual utama seperti body dan bilah navigasi.
+## 👤 Informasi Mahasiswa
 
-AppBar: Komponen navigasi atas yang menampilkan teks judul halaman, yakni "Notifikasi & Hardware API".
+- **Nama:** Ahmad Titana Nanda Pramudya
+- **Program Studi:** Teknik Informatika
+- **Kelas:** IF-11-02
 
-Center: Widget pembungkus yang berfungsi untuk menempatkan seluruh elemen yang ada di dalamnya (seperti layout utama) agar berada tepat di tengah-tengah layar.
+---
 
-Column: Berperan mengatur tata letak widget secara vertikal, menyusun area penampil gambar dan barisan tombol agar berurut dari atas ke bawah.
+## 📖 Gambaran Umum Aplikasi
 
-Image.file: Komponen visual yang bertugas membaca, memuat, dan menampilkan file gambar yang tersimpan di dalam memori lokal perangkat ke layar aplikasi.
+Proyek ini memanfaatkan dua *package* utama:
+1. `image_picker`: Untuk mengakses kamera dan memori lokal (galeri).
+2. `flutter_local_notifications`: Untuk mengirimkan pemberitahuan lokal ke sistem Android.
 
-Text: Berfungsi untuk menampilkan tulisan atau string statis. Biasanya dimanfaatkan sebagai label teks pada tombol atau sebagai pesan placeholder ketika pengguna belum memilih gambar.
+**Alur Kerja:**
+Pengguna menjepret foto atau memilih gambar dari galeri ➡️ Gambar dimuat secara dinamis di antarmuka utama ➡️ Aplikasi secara bersamaan memunculkan notifikasi lokal pada perangkat.
 
-SizedBox: Digunakan untuk menyisipkan ruang kosong atau jarak vertikal sebesar 40 piksel. Ini berguna untuk memisahkan area gambar dengan area tombol agar antarmuka tidak terlihat menumpuk.
+---
 
-Row: Mengatur tata letak komponen secara horizontal sehingga tombol "Kamera" dan "Galeri" dapat diletakkan rapi berdampingan dari kiri ke kanan.
+## 🧩 Rincian Fungsi Widget
 
-ElevatedButton.icon: Komponen tombol bergaya Material Design yang memiliki efek timbul (bayangan), serta memungkinkan penggabungan ikon dan teks di dalam satu tombol.
+Berikut adalah struktur penyusun antarmuka aplikasi ini:
 
-Icon: Menampilkan simbol grafis (ikon bawaan Material) guna memberikan petunjuk visual yang intuitif pada tombol-tombol yang tersedia.
+| Komponen / *Widget* | Fungsi & Deskripsi |
+| :--- | :--- |
+| `Scaffold` | Fondasi utama halaman aplikasi yang menampung elemen-elemen visual dasar (seperti *body* dan bilah navigasi). |
+| `AppBar` | Komponen navigasi atas yang menampilkan teks judul halaman: **"Notifikasi & Hardware API"**. |
+| `Center` | *Widget* pembungkus untuk memastikan seluruh elemen di dalamnya berada tepat di tengah-tengah layar. |
+| `Column` | Mengatur tata letak *widget* secara vertikal, menyusun area gambar dan barisan tombol berurut dari atas ke bawah. |
+| `Image.file` | Komponen visual untuk membaca, memuat, dan menampilkan *file* gambar yang tersimpan di dalam memori perangkat ke layar. |
+| `Text` | Menampilkan teks statis, dimanfaatkan sebagai label tombol atau pesan *placeholder* ketika gambar belum dipilih. |
+| `SizedBox` | Menyisipkan ruang kosong atau jarak vertikal sebesar 40 piksel agar antarmuka tidak menumpuk antara area gambar dan tombol. |
+| `Row` | Mengatur tata letak secara horizontal sehingga tombol "Kamera" dan "Galeri" diletakkan sejajar berdampingan. |
+| `ElevatedButton.icon` | Tombol bergaya *Material Design* dengan efek timbul yang menggabungkan ikon dan teks di dalamnya. |
+| `Icon` | Menampilkan simbol grafis (*Material Icons*) guna memberikan petunjuk visual yang intuitif pada tombol-tombol yang tersedia. |
 
-Konfigurasi Khusus & Troubleshooting
-Untuk memastikan kompatibilitas dan kelancaran aplikasi pada sistem operasi Android modern, diterapkan beberapa penyesuaian teknis berikut:
+---
 
-Izin Notifikasi (Android 13+ / API 33): Terdapat penambahan pemanggilan fungsi requestNotificationsPermission() pada tahap inisialisasi di main.dart. Penyesuaian ini bertujuan untuk memicu pop-up dialog yang meminta persetujuan pengguna secara langsung (runtime permission) agar aplikasi diizinkan mengirimkan notifikasi pada saat pertama kali dibuka.
+## ⚙️ Konfigurasi Khusus & *Troubleshooting*
 
-Dukungan Core Library Desugaring (Kotlin DSL): Agar plugin notifikasi dapat beroperasi dengan baik pada Gradle versi terbaru, fitur bawaan Java 8 harus didukung. Oleh karena itu, pengaturan isCoreLibraryDesugaringEnabled = true diaktifkan dan dependensi coreLibraryDesugaring ditambahkan secara manual ke dalam fail konfigurasi build.gradle.kts (level app).
+Untuk memastikan kelancaran aplikasi pada sistem operasi Android modern (khususnya Android 13 ke atas), beberapa penyesuaian teknis telah diterapkan pada *source code*:
+
+### 1. Izin Notifikasi (Android 13+ / API 33)
+> Memanggil fungsi `requestNotificationsPermission()` pada tahap inisialisasi di `main.dart`. Penyesuaian ini memicu *pop-up runtime permission* yang meminta persetujuan pengguna agar aplikasi diizinkan mengirimkan notifikasi saat pertama kali dijalankan.
+
+### 2. Dukungan *Core Library Desugaring* (Kotlin DSL)
+> Agar *plugin* notifikasi beroperasi maksimal pada Gradle versi terbaru (yang membutuhkan fitur bawaan Java 8), pengaturan `isCoreLibraryDesugaringEnabled = true` telah diaktifkan. Selain itu, dependensi `coreLibraryDesugaring` telah ditambahkan secara manual ke dalam fail konfigurasi `build.gradle.kts` (level *app*).
+
+---
+*Dibuat untuk memenuhi Tugas Praktikum Teknik Informatika.*
