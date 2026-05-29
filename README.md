@@ -53,4 +53,3 @@ Untuk memastikan kelancaran aplikasi pada sistem operasi Android modern (khususn
 > Agar *plugin* notifikasi beroperasi maksimal pada Gradle versi terbaru (yang membutuhkan fitur bawaan Java 8), pengaturan `isCoreLibraryDesugaringEnabled = true` telah diaktifkan. Selain itu, dependensi `coreLibraryDesugaring` telah ditambahkan secara manual ke dalam fail konfigurasi `build.gradle.kts` (level *app*).
 
 ---
-*Dibuat untuk memenuhi Tugas Praktikum Teknik Informatika.*
